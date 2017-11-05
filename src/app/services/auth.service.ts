@@ -58,8 +58,8 @@ export class AuthService {
 
   // Function to logout
   logout() {
-    this.authToken = null; // Set token to null
-    this.user = null; // Set user to null
+    this.authToken = null;
+    this.user = null;
     localStorage.clear(); // Clear local storage
   }
   loggedIn() {

@@ -12,17 +12,17 @@ export class ManagerGuard implements CanActivate {
     private router: Router
   ) { }
 
-  // Function to check if user is authorized to view route
+  // Function to check if user is manager
   canActivate(
     router: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ) {
-    // Check if user is logge din
+
     if (this.authService.isManager()) {
       return true; // Return true: User is allowed to view route
     } else {
-      this.redirectUrl = state.url; // Grab previous urul
-      this.router.navigate(['/login']); // Return error and route to login page
+      this.redirectUrl = state.url;
+      this.router.navigate(['/login']);
       return false; // Return false: user not authorized to view page
     }
   }

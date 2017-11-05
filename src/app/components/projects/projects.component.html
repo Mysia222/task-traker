@@ -1,7 +1,7 @@
 <div class="jumbotron">
     <h2 class="page-header">Projects</h2>
 </div>
-<!-- Custom Success/Error Message -->
+<!--  Success/Error Message -->
 <div class="row show-hide-message" *ngIf="message && newProject">
     <div [ngClass]="messageClass">
         {{ message }}
@@ -10,11 +10,25 @@
 
 <div class="container">
 
-
     <button type="button" name="button" class="btn btn-warning" *ngIf="!newProject" (click)="NewProjectForm()">New Post</button>
+    <br>
+    <br>
 
-    <br />
-    <br />
+    <form [formGroup]="newProjectForm" name="projectForm" (submit)="onProjectSubmit()" *ngIf="newProject">
+        <div class="form-group">
+            <label for="title">Title</label>
+            <input type="text" name="title" class="form-control" placeholder="*Blog Title" autocomplete="off" formControlName="title" />
+        </div>
+
+        <div class="form-group">
+            <label for="description">Description</label>
+            <textarea name="description" rows="8" cols="80" placeholder="*Description" class="form-control" formControlName="description"></textarea>
+        </div>
+
+        <button [disabled]="processing" type="button" (click)="goBack()" name="button" class="btn btn-warning">Go Back</button>
+        <button [disabled]="processing" type="submit" name="button" class="btn btn-success">Submit</button>
+
+    </form>
 
     <div *ngIf="!newProject">
         <!--<div class="row project-row">

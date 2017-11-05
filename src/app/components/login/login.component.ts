@@ -33,7 +33,6 @@ export class LoginComponent implements OnInit {
     });
   }
 
-
   onLoginSubmit() {
     this.processing = true;
     const user = {
@@ -44,7 +43,7 @@ export class LoginComponent implements OnInit {
 
     // Function to send login data to API
     this.authService.login(user).subscribe(data => {
-      // Check if response was a success or error
+
       if (!data.success) {
         this.messageClass = 'alert alert-danger';
         this.message = data.message;
@@ -55,9 +54,9 @@ export class LoginComponent implements OnInit {
         this.authService.storeUserData(data.token, data.user);
         setTimeout(() => {
           if (this.previousUrl) {
-            this.router.navigate([this.previousUrl]); // Redirect to page they were trying to view before
+            this.router.navigate([this.previousUrl]);
           } else {
-            this.router.navigate(['/profile']); // Navigate to dashboard view
+            this.router.navigate(['/profile']);
           }
         }, 2000);
       }
@@ -65,11 +64,12 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
+    // Set error message: need to login
     if (this.authGuard.redirectUrl) {
-      this.messageClass = 'alert alert-danger'; // Set error message: need to login
-      this.message = 'You must be logged in to view that page.'; // Set message
-      this.previousUrl = this.authGuard.redirectUrl; // Set the previous URL user was redirected from
-      this.authGuard.redirectUrl = undefined; // Erase previous URL
+      this.messageClass = 'alert alert-danger';
+      this.message = 'You must be logged in to view that page.';
+      this.previousUrl = this.authGuard.redirectUrl;
+      this.authGuard.redirectUrl = undefined;
     }
   }
 }

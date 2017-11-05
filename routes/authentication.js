@@ -193,8 +193,6 @@ module.exports = (router) => {
         }
     });
 
-
-
     router.get('/profile', (req, res) => {
         User.findOne({ _id: req.decoded.userId }).select('username email role').exec((err, user) => {
             // Check if error connecting

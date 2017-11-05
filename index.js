@@ -3,23 +3,26 @@ const app = express();
 const router = express.Router(); // Creates a new router object.
 const port = process.env.PORT || 8080; // Allows heroku to set port
 
-const DB_URI = "mongodb://localhost:27017/task" // mongodb://domain:port/database-name
-const mongoose = require('mongoose'); // Node Tool for MongoDB
+const DB_URI = "mongodb://localhost:27017/traker";
+const mongoose = require('mongoose');
 const path = require('path');
-const authentication = require('./routes/authentication')(router); // Import Authentication Routes
+//routes
+const authentication = require('./routes/authentication')(router);
+const projects = require('./routes/projects')(router);
+
 const bodyParser = require('body-parser');
 const cors = require('cors');
+
 // Connect to MongoDB
 mongoose.connect(DB_URI);
-// CONNECTION EVENTS
 mongoose.connection.once('connected', function() {
-    console.log("Database connected to " + DB_URI)
+    console.log("Database connected to " + DB_URI);
 });
 mongoose.connection.on('error', function(err) {
-    console.log("MongoDB connection error: " + err)
+    console.log("MongoDB connection error: " + err);
 });
 mongoose.connection.once('disconnected', function() {
-    console.log("Database disconnected")
+    console.log("Database disconnected");
 });
 
 
@@ -28,8 +31,10 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'dist')));
-app.use('/authentication', authentication); // Use Authentication routes in application
 
+// Use routes in application
+app.use('/authentication', authentication);
+app.use('/projects', projects);
 
 // Send all other requests to the Angular app
 app.get('*', (req, res) => {

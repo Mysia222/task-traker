@@ -26,32 +26,32 @@ const appRoutes: Routes = [
   },
   {
     path: 'about',
-    component: AboutComponent, // Dashboard Route,
+    component: AboutComponent,
     canActivate: [AuthGuard]
   },
   {
     path: 'register',
-    component: RegisterComponent, // Login Route
+    component: RegisterComponent,
     canActivate: [NotAuthGuard]
   },
   {
     path: 'login',
-    component: LoginComponent, // Login Route
+    component: LoginComponent,
     canActivate: [NotAuthGuard]
   },
   {
     path: 'activate/:token',
-    component: ActivateComponent, // Login Route
+    component: ActivateComponent,
     canActivate: [NotAuthGuard]
   },
   {
     path: 'projects',
-    component: ProjectsComponent, // Dashboard Route,
+    component: ProjectsComponent,
     canActivate: [ManagerGuard]
   },
   {
     path: 'profile',
-    component: ProfileComponent, // Dashboard Route,
+    component: ProfileComponent,
     canActivate: [AuthGuard]
   },
   { path: '**', component: HomeComponent }

@@ -1,9 +1,8 @@
-const mongoose = require('mongoose'); // Node Tool for MongoDB
-mongoose.Promise = global.Promise; // Configure Mongoose Promises
-const Schema = mongoose.Schema; // Import Schema from Mongoose
+const mongoose = require('mongoose');
+mongoose.Promise = global.Promise;
+const Schema = mongoose.Schema;
 
 const bcrypt = require('bcrypt-nodejs');
-
 
 // Validate Function to check e-mail length
 let emailLengthChecker = (email) => {
@@ -18,7 +17,7 @@ let emailLengthChecker = (email) => {
     }
 };
 
-// Array of Email Validators
+
 const emailValidators = [{
     validator: emailLengthChecker,
     message: 'E-mail must be at least 5 characters but no more than 30'
@@ -26,7 +25,6 @@ const emailValidators = [{
 
 
 let usernameLengthChecker = (username) => {
-
     if (!username) {
         return false;
     } else {
@@ -38,31 +36,30 @@ let usernameLengthChecker = (username) => {
     }
 };
 
-// Array of Username validators
+
 const usernameValidators = [{
     validator: usernameLengthChecker,
     message: 'Username must be at least 3 characters but no more than 15'
 }];
 
 let passwordLengthChecker = (password) => {
-    // Check if password exists
     if (!password) {
-        return false; // Return error
+        return false;
     } else {
-        // Check password length
         if (password.length < 6 || password.length > 35) {
-            return false; // Return error if passord length requirement is not met
+            return false;
         } else {
-            return true; // Return password as valid
+            return true;
         }
     }
 };
 
-// Array of Password validators
+
 const passwordValidators = [{
     validator: passwordLengthChecker,
     message: 'Password must be at least 6 characters but no more than 35'
 }, ];
+
 
 // User Model Definition
 const userSchema = new Schema({
@@ -82,17 +79,16 @@ userSchema.pre('save', function(next) {
 
     // Apply encryption
     bcrypt.hash(this.password, null, null, (err, hash) => {
-        if (err) return next(err); // Ensure no errors
-        this.password = hash; // Apply encryption to password
-        next(); // Exit middleware
+        if (err) return next(err);
+        this.password = hash;
+        next();
     });
 });
 
-// Methods to compare password to encrypted password upon login
+// methods to compare password to encrypted password upon login
 userSchema.methods.comparePassword = function(password) {
-    return bcrypt.compareSync(password, this.password); // Return comparison of login password to password in database (true or false)
+    return bcrypt.compareSync(password, this.password);
 };
 
 
-// Export Module/Schema
 module.exports = mongoose.model('User', userSchema);

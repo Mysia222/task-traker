@@ -20,8 +20,8 @@ export class ProfileComponent implements OnInit {
   ngOnInit() {
     // Once component loads, get user's data to display on profile
     this.authService.getProfile().subscribe(profile => {
-      this.username = profile.user.username; // Set username
-      this.email = profile.user.email; // Set e-mail
+      this.username = profile.user.username;
+      this.email = profile.user.email;
       this.role = profile.user.role;
     });
   }

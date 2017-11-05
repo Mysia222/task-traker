@@ -13,6 +13,8 @@ import { AboutComponent } from './components/about/about.component';
 import { RegisterComponent } from './components/register/register.component';
 
 import { AuthService } from './services/auth.service';
+import { ProjectService } from './services/project.service';
+
 import { LoginComponent } from './components/login/login.component';
 import { ProfileComponent } from './components/profile/profile.component';
 
@@ -43,7 +45,7 @@ import { ProjectsComponent } from './components/projects/projects.component';
     AppRoutingModule,
     FlashMessagesModule
   ],
-  providers: [AuthService, AuthGuard, NotAuthGuard, ManagerGuard],
+  providers: [AuthService, ProjectService, AuthGuard, NotAuthGuard, ManagerGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

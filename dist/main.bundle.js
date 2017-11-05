@@ -186,19 +186,21 @@ var AppComponent = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__components_about_about_component__ = __webpack_require__("../../../../../src/app/components/about/about.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__components_register_register_component__ = __webpack_require__("../../../../../src/app/components/register/register.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__services_auth_service__ = __webpack_require__("../../../../../src/app/services/auth.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__components_login_login_component__ = __webpack_require__("../../../../../src/app/components/login/login.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__components_profile_profile_component__ = __webpack_require__("../../../../../src/app/components/profile/profile.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__guards_auth_guard__ = __webpack_require__("../../../../../src/app/guards/auth.guard.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__guards_notAuth_guard__ = __webpack_require__("../../../../../src/app/guards/notAuth.guard.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__guards_manager_guard__ = __webpack_require__("../../../../../src/app/guards/manager.guard.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__components_activate_activate_component__ = __webpack_require__("../../../../../src/app/components/activate/activate.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__components_projects_projects_component__ = __webpack_require__("../../../../../src/app/components/projects/projects.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__services_project_service__ = __webpack_require__("../../../../../src/app/services/project.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__components_login_login_component__ = __webpack_require__("../../../../../src/app/components/login/login.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__components_profile_profile_component__ = __webpack_require__("../../../../../src/app/components/profile/profile.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__guards_auth_guard__ = __webpack_require__("../../../../../src/app/guards/auth.guard.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__guards_notAuth_guard__ = __webpack_require__("../../../../../src/app/guards/notAuth.guard.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__guards_manager_guard__ = __webpack_require__("../../../../../src/app/guards/manager.guard.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__components_activate_activate_component__ = __webpack_require__("../../../../../src/app/components/activate/activate.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__components_projects_projects_component__ = __webpack_require__("../../../../../src/app/components/projects/projects.component.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -230,10 +232,10 @@ var AppModule = (function () {
                 __WEBPACK_IMPORTED_MODULE_8__components_home_home_component__["a" /* HomeComponent */],
                 __WEBPACK_IMPORTED_MODULE_9__components_about_about_component__["a" /* AboutComponent */],
                 __WEBPACK_IMPORTED_MODULE_10__components_register_register_component__["a" /* RegisterComponent */],
-                __WEBPACK_IMPORTED_MODULE_12__components_login_login_component__["a" /* LoginComponent */],
-                __WEBPACK_IMPORTED_MODULE_13__components_profile_profile_component__["a" /* ProfileComponent */],
-                __WEBPACK_IMPORTED_MODULE_17__components_activate_activate_component__["a" /* ActivateComponent */],
-                __WEBPACK_IMPORTED_MODULE_18__components_projects_projects_component__["a" /* ProjectsComponent */]
+                __WEBPACK_IMPORTED_MODULE_13__components_login_login_component__["a" /* LoginComponent */],
+                __WEBPACK_IMPORTED_MODULE_14__components_profile_profile_component__["a" /* ProfileComponent */],
+                __WEBPACK_IMPORTED_MODULE_18__components_activate_activate_component__["a" /* ActivateComponent */],
+                __WEBPACK_IMPORTED_MODULE_19__components_projects_projects_component__["a" /* ProjectsComponent */]
             ],
             imports: [
                 __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
@@ -243,7 +245,7 @@ var AppModule = (function () {
                 __WEBPACK_IMPORTED_MODULE_4__app_routing_module__["a" /* AppRoutingModule */],
                 __WEBPACK_IMPORTED_MODULE_5_angular2_flash_messages__["FlashMessagesModule"]
             ],
-            providers: [__WEBPACK_IMPORTED_MODULE_11__services_auth_service__["a" /* AuthService */], __WEBPACK_IMPORTED_MODULE_14__guards_auth_guard__["a" /* AuthGuard */], __WEBPACK_IMPORTED_MODULE_15__guards_notAuth_guard__["a" /* NotAuthGuard */], __WEBPACK_IMPORTED_MODULE_16__guards_manager_guard__["a" /* ManagerGuard */]],
+            providers: [__WEBPACK_IMPORTED_MODULE_11__services_auth_service__["a" /* AuthService */], __WEBPACK_IMPORTED_MODULE_12__services_project_service__["a" /* ProjectService */], __WEBPACK_IMPORTED_MODULE_15__guards_auth_guard__["a" /* AuthGuard */], __WEBPACK_IMPORTED_MODULE_16__guards_notAuth_guard__["a" /* NotAuthGuard */], __WEBPACK_IMPORTED_MODULE_17__guards_manager_guard__["a" /* ManagerGuard */]],
             bootstrap: [__WEBPACK_IMPORTED_MODULE_6__app_component__["a" /* AppComponent */]]
         })
     ], AppModule);
@@ -531,7 +533,6 @@ var LoginComponent = (function () {
         };
         // Function to send login data to API
         this.authService.login(user).subscribe(function (data) {
-            // Check if response was a success or error
             if (!data.success) {
                 _this.messageClass = 'alert alert-danger';
                 _this.message = data.message;
@@ -543,21 +544,22 @@ var LoginComponent = (function () {
                 _this.authService.storeUserData(data.token, data.user);
                 setTimeout(function () {
                     if (_this.previousUrl) {
-                        _this.router.navigate([_this.previousUrl]); // Redirect to page they were trying to view before
+                        _this.router.navigate([_this.previousUrl]);
                     }
                     else {
-                        _this.router.navigate(['/profile']); // Navigate to dashboard view
+                        _this.router.navigate(['/profile']);
                     }
                 }, 2000);
             }
         });
     };
     LoginComponent.prototype.ngOnInit = function () {
+        // Set error message: need to login
         if (this.authGuard.redirectUrl) {
-            this.messageClass = 'alert alert-danger'; // Set error message: need to login
-            this.message = 'You must be logged in to view that page.'; // Set message
-            this.previousUrl = this.authGuard.redirectUrl; // Set the previous URL user was redirected from
-            this.authGuard.redirectUrl = undefined; // Erase previous URL
+            this.messageClass = 'alert alert-danger';
+            this.message = 'You must be logged in to view that page.';
+            this.previousUrl = this.authGuard.redirectUrl;
+            this.authGuard.redirectUrl = undefined;
         }
     };
     LoginComponent = __decorate([
@@ -711,8 +713,8 @@ var ProfileComponent = (function () {
         var _this = this;
         // Once component loads, get user's data to display on profile
         this.authService.getProfile().subscribe(function (profile) {
-            _this.username = profile.user.username; // Set username
-            _this.email = profile.user.email; // Set e-mail
+            _this.username = profile.user.username;
+            _this.email = profile.user.email;
             _this.role = profile.user.role;
         });
     };
@@ -752,7 +754,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/projects/projects.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"jumbotron\">\n    <h2 class=\"page-header\">Projects</h2>\n</div>\n<!-- Custom Success/Error Message -->\n<div class=\"row show-hide-message\" *ngIf=\"message && newProject\">\n    <div [ngClass]=\"messageClass\">\n        {{ message }}\n    </div>\n</div>\n\n<div class=\"container\">\n\n\n    <button type=\"button\" name=\"button\" class=\"btn btn-warning\" *ngIf=\"!newProject\" (click)=\"NewProjectForm()\">New Post</button>\n\n    <br />\n    <br />\n\n    <div *ngIf=\"!newProject\">\n        <!--<div class=\"row project-row\">\n            <div class=\"col-xs-6 col-lg-4\">\n                <h2>Heading</h2>\n                <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>\n            </div>\n        </div>-->\n        <div class=\"card\">\n            <div class=\"card-header deep-orange lighten-1 white-text\">\n                Featured\n            </div>\n            <div class=\"card-body\">\n                <h4 class=\"card-title\">Special title treatment</h4>\n                <p class=\"card-text\">With supporting text below as a natural lead-in to additional content.</p>\n                <button type=\"button\" name=\"button\" class=\"btn btn-default\"><a class=\"btn btn-deep-orange\">Go somewhere</a></button>\n            </div>\n        </div>\n    </div>"
+module.exports = "<div class=\"jumbotron\">\n    <h2 class=\"page-header\">Projects</h2>\n</div>\n<!--  Success/Error Message -->\n<div class=\"row show-hide-message\" *ngIf=\"message && newProject\">\n    <div [ngClass]=\"messageClass\">\n        {{ message }}\n    </div>\n</div>\n\n<div class=\"container\">\n\n    <button type=\"button\" name=\"button\" class=\"btn btn-warning\" *ngIf=\"!newProject\" (click)=\"NewProjectForm()\">New Post</button>\n    <br>\n    <br>\n\n    <form [formGroup]=\"newProjectForm\" name=\"projectForm\" (submit)=\"onProjectSubmit()\" *ngIf=\"newProject\">\n        <div class=\"form-group\">\n            <label for=\"title\">Title</label>\n            <input type=\"text\" name=\"title\" class=\"form-control\" placeholder=\"*Blog Title\" autocomplete=\"off\" formControlName=\"title\" />\n        </div>\n\n        <div class=\"form-group\">\n            <label for=\"description\">Description</label>\n            <textarea name=\"description\" rows=\"8\" cols=\"80\" placeholder=\"*Description\" class=\"form-control\" formControlName=\"description\"></textarea>\n        </div>\n\n        <button [disabled]=\"processing\" type=\"button\" (click)=\"goBack()\" name=\"button\" class=\"btn btn-warning\">Go Back</button>\n        <button [disabled]=\"processing\" type=\"submit\" name=\"button\" class=\"btn btn-success\">Submit</button>\n\n    </form>\n\n    <div *ngIf=\"!newProject\">\n        <!--<div class=\"row project-row\">\n            <div class=\"col-xs-6 col-lg-4\">\n                <h2>Heading</h2>\n                <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>\n            </div>\n        </div>-->\n        <div class=\"card\">\n            <div class=\"card-header deep-orange lighten-1 white-text\">\n                Featured\n            </div>\n            <div class=\"card-body\">\n                <h4 class=\"card-title\">Special title treatment</h4>\n                <p class=\"card-text\">With supporting text below as a natural lead-in to additional content.</p>\n                <button type=\"button\" name=\"button\" class=\"btn btn-default\"><a class=\"btn btn-deep-orange\">Go somewhere</a></button>\n            </div>\n        </div>\n    </div>"
 
 /***/ }),
 
@@ -762,6 +764,9 @@ module.exports = "<div class=\"jumbotron\">\n    <h2 class=\"page-header\">Proje
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ProjectsComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_forms__ = __webpack_require__("../../../forms/esm5/forms.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_auth_service__ = __webpack_require__("../../../../../src/app/services/auth.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_project_service__ = __webpack_require__("../../../../../src/app/services/project.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -772,18 +777,65 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
+
+
+
 var ProjectsComponent = (function () {
-    function ProjectsComponent() {
+    function ProjectsComponent(formBuilder, authService, projectService) {
+        this.formBuilder = formBuilder;
+        this.authService = authService;
+        this.projectService = projectService;
         this.newProject = false;
         this.loadingProjects = false;
+        this.processing = false;
+        this.createNewProjectForm();
     }
+    ProjectsComponent.prototype.createNewProjectForm = function () {
+        this.newProjectForm = this.formBuilder.group({
+            title: '',
+            description: ''
+        });
+    };
     ProjectsComponent.prototype.NewProjectForm = function () {
         this.newProject = true;
     };
     ProjectsComponent.prototype.reloadProject = function () {
         this.loadingProjects = true;
     };
+    ProjectsComponent.prototype.onProjectSubmit = function () {
+        var _this = this;
+        this.processing = true;
+        var project = {
+            title: this.newProjectForm.get('title').value,
+            description: this.newProjectForm.get('description').value,
+            createdBy: this.username
+        };
+        this.projectService.newProject(project).subscribe(function (data) {
+            if (!data.success) {
+                _this.messageClass = 'alert alert-danger';
+                _this.message = data.message;
+                _this.processing = false;
+            }
+            else {
+                _this.messageClass = 'alert alert-success';
+                _this.message = data.message;
+                setTimeout(function () {
+                    _this.newProject = false;
+                    _this.processing = false;
+                    _this.message = false;
+                    _this.newProjectForm.reset();
+                }, 500);
+            }
+        });
+    };
+    ProjectsComponent.prototype.goBack = function () {
+        window.location.reload();
+    };
     ProjectsComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.authService.getProfile().subscribe(function (profile) {
+            _this.username = profile.user.username; // Used when creating new project
+        });
     };
     ProjectsComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
@@ -791,7 +843,9 @@ var ProjectsComponent = (function () {
             template: __webpack_require__("../../../../../src/app/components/projects/projects.component.html"),
             styles: [__webpack_require__("../../../../../src/app/components/projects/projects.component.css")]
         }),
-        __metadata("design:paramtypes", [])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_forms__["a" /* FormBuilder */],
+            __WEBPACK_IMPORTED_MODULE_2__services_auth_service__["a" /* AuthService */],
+            __WEBPACK_IMPORTED_MODULE_3__services_project_service__["a" /* ProjectService */]])
     ], ProjectsComponent);
     return ProjectsComponent;
 }());
@@ -938,13 +992,12 @@ var AuthGuard = (function () {
     }
     // Function to check if user is authorized to view route
     AuthGuard.prototype.canActivate = function (router, state) {
-        // Check if user is logge din
         if (this.authService.loggedIn()) {
             return true; // Return true: User is allowed to view route
         }
         else {
-            this.redirectUrl = state.url; // Grab previous urul
-            this.router.navigate(['/login']); // Return error and route to login page
+            this.redirectUrl = state.url;
+            this.router.navigate(['/login']);
             return false; // Return false: user not authorized to view page
         }
     };
@@ -985,15 +1038,14 @@ var ManagerGuard = (function () {
         this.authService = authService;
         this.router = router;
     }
-    // Function to check if user is authorized to view route
+    // Function to check if user is manager
     ManagerGuard.prototype.canActivate = function (router, state) {
-        // Check if user is logge din
         if (this.authService.isManager()) {
             return true; // Return true: User is allowed to view route
         }
         else {
-            this.redirectUrl = state.url; // Grab previous urul
-            this.router.navigate(['/login']); // Return error and route to login page
+            this.redirectUrl = state.url;
+            this.router.navigate(['/login']);
             return false; // Return false: user not authorized to view page
         }
     };
@@ -1036,9 +1088,8 @@ var NotAuthGuard = (function () {
     }
     // Function to determine whether user is authorized to view route
     NotAuthGuard.prototype.canActivate = function () {
-        // Check if user is logged in
         if (this.authService.loggedIn()) {
-            this.router.navigate(['/']); // Return error, route to home
+            this.router.navigate(['/']);
             return false; // Return false: user not allowed to view route
         }
         else {
@@ -1119,8 +1170,8 @@ var AuthService = (function () {
     };
     // Function to logout
     AuthService.prototype.logout = function () {
-        this.authToken = null; // Set token to null
-        this.user = null; // Set user to null
+        this.authToken = null;
+        this.user = null;
         localStorage.clear(); // Clear local storage
     };
     AuthService.prototype.loggedIn = function () {
@@ -1157,6 +1208,57 @@ var AuthService = (function () {
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_http__["Http"]])
     ], AuthService);
     return AuthService;
+}());
+
+
+
+/***/ }),
+
+/***/ "../../../../../src/app/services/project.service.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ProjectService; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__auth_service__ = __webpack_require__("../../../../../src/app/services/auth.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_http__ = __webpack_require__("../../../http/esm5/http.js");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+var ProjectService = (function () {
+    function ProjectService(authService, http) {
+        this.authService = authService;
+        this.http = http;
+        this.domain = this.authService.domain;
+    }
+    ProjectService.prototype.createAuthenticationHeaders = function () {
+        this.authService.loadToken();
+        this.options = new __WEBPACK_IMPORTED_MODULE_2__angular_http__["RequestOptions"]({
+            headers: new __WEBPACK_IMPORTED_MODULE_2__angular_http__["Headers"]({
+                'Content-Type': 'application/json',
+                'authorization': this.authService.authToken
+            })
+        });
+    };
+    ProjectService.prototype.newProject = function (project) {
+        this.createAuthenticationHeaders();
+        return this.http.post(this.domain + '/projects/newProject', project, this.options).map(function (res) { return res.json(); });
+    };
+    ProjectService = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__auth_service__["a" /* AuthService */],
+            __WEBPACK_IMPORTED_MODULE_2__angular_http__["Http"]])
+    ], ProjectService);
+    return ProjectService;
 }());
 
 
