@@ -13,7 +13,7 @@ module.exports = (router) => {
         } else {
             const project = new Project({
                 title: req.body.title,
-                body: req.body.description,
+                description: req.body.description,
                 createdBy: req.body.createdBy
             });
 
@@ -21,15 +21,19 @@ module.exports = (router) => {
                 if (err) {
                     if (err.errors) {
                         if (err.errors.title) {
+                            console.log("title");
                             res.json({ success: false, message: err.errors.title.message });
                         } else {
                             if (err.errors.description) {
+                                console.log("description");
                                 res.json({ success: false, message: err.errors.description.message });
                             } else {
+                                console.log("ather");
                                 res.json({ success: false, message: err });
                             }
                         }
                     } else {
+                        console.log("d");
                         res.json({ success: false, message: err });
                     }
                 } else {
