@@ -10,7 +10,7 @@
 
 <div class="container">
 
-    <button type="button" name="button" class="btn btn-warning" *ngIf="!newProject" (click)="NewProjectForm()">New Post</button>
+    <button type="button" name="button" class="btn btn-warning" *ngIf="!newProject" (click)="NewProjectForm()">New Project</button>
     <br>
     <br>
 
@@ -31,20 +31,14 @@
     </form>
 
     <div *ngIf="!newProject">
-        <!--<div class="row project-row">
-            <div class="col-xs-6 col-lg-4">
-                <h2>Heading</h2>
-                <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-            </div>
-        </div>-->
-        <div class="card">
+
+        <div class="card" *ngFor="let project of projects">
             <div class="card-header deep-orange lighten-1 white-text">
-                Featured
             </div>
             <div class="card-body">
-                <h4 class="card-title">Special title treatment</h4>
-                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                <button type="button" name="button" class="btn btn-default"><a class="btn btn-deep-orange">Go somewhere</a></button>
+                <h4 class="card-title">{{ project.title }}</h4>
+                <p class="card-text"> {{ project.createdBy }} </p>
+                <button [routerLink]="['/project/', project._id]" type="button" name="button" class="btn btn-default"><a class="btn btn-deep-orange">More Information</a></button>
             </div>
         </div>
     </div>

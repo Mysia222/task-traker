@@ -31,15 +31,17 @@ webpackEmptyAsyncContext.id = "../../../../../src/$$_lazy_route_resource lazy re
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_profile_profile_component__ = __webpack_require__("../../../../../src/app/components/profile/profile.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__components_activate_activate_component__ = __webpack_require__("../../../../../src/app/components/activate/activate.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__components_projects_projects_component__ = __webpack_require__("../../../../../src/app/components/projects/projects.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__guards_auth_guard__ = __webpack_require__("../../../../../src/app/guards/auth.guard.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__guards_notAuth_guard__ = __webpack_require__("../../../../../src/app/guards/notAuth.guard.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__guards_manager_guard__ = __webpack_require__("../../../../../src/app/guards/manager.guard.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__components_project_project_component__ = __webpack_require__("../../../../../src/app/components/project/project.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__guards_auth_guard__ = __webpack_require__("../../../../../src/app/guards/auth.guard.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__guards_notAuth_guard__ = __webpack_require__("../../../../../src/app/guards/notAuth.guard.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__guards_manager_guard__ = __webpack_require__("../../../../../src/app/guards/manager.guard.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -64,34 +66,42 @@ var appRoutes = [
     {
         path: 'about',
         component: __WEBPACK_IMPORTED_MODULE_3__components_about_about_component__["a" /* AboutComponent */],
-        canActivate: [__WEBPACK_IMPORTED_MODULE_9__guards_auth_guard__["a" /* AuthGuard */]]
+        canActivate: [__WEBPACK_IMPORTED_MODULE_10__guards_auth_guard__["a" /* AuthGuard */]]
     },
     {
         path: 'register',
         component: __WEBPACK_IMPORTED_MODULE_4__components_register_register_component__["a" /* RegisterComponent */],
-        canActivate: [__WEBPACK_IMPORTED_MODULE_10__guards_notAuth_guard__["a" /* NotAuthGuard */]]
+        canActivate: [__WEBPACK_IMPORTED_MODULE_11__guards_notAuth_guard__["a" /* NotAuthGuard */]]
     },
     {
         path: 'login',
         component: __WEBPACK_IMPORTED_MODULE_5__components_login_login_component__["a" /* LoginComponent */],
-        canActivate: [__WEBPACK_IMPORTED_MODULE_10__guards_notAuth_guard__["a" /* NotAuthGuard */]]
+        canActivate: [__WEBPACK_IMPORTED_MODULE_11__guards_notAuth_guard__["a" /* NotAuthGuard */]]
     },
     {
         path: 'activate/:token',
         component: __WEBPACK_IMPORTED_MODULE_7__components_activate_activate_component__["a" /* ActivateComponent */],
-        canActivate: [__WEBPACK_IMPORTED_MODULE_10__guards_notAuth_guard__["a" /* NotAuthGuard */]]
+        canActivate: [__WEBPACK_IMPORTED_MODULE_10__guards_auth_guard__["a" /* AuthGuard */]]
     },
     {
         path: 'projects',
         component: __WEBPACK_IMPORTED_MODULE_8__components_projects_projects_component__["a" /* ProjectsComponent */],
-        canActivate: [__WEBPACK_IMPORTED_MODULE_11__guards_manager_guard__["a" /* ManagerGuard */]]
+        canActivate: [__WEBPACK_IMPORTED_MODULE_12__guards_manager_guard__["a" /* ManagerGuard */]]
     },
     {
         path: 'profile',
         component: __WEBPACK_IMPORTED_MODULE_6__components_profile_profile_component__["a" /* ProfileComponent */],
-        canActivate: [__WEBPACK_IMPORTED_MODULE_9__guards_auth_guard__["a" /* AuthGuard */]]
+        canActivate: [__WEBPACK_IMPORTED_MODULE_10__guards_auth_guard__["a" /* AuthGuard */]]
     },
-    { path: '**', component: __WEBPACK_IMPORTED_MODULE_2__components_home_home_component__["a" /* HomeComponent */] }
+    {
+        path: 'project/:id',
+        component: __WEBPACK_IMPORTED_MODULE_9__components_project_project_component__["a" /* ProjectComponent */],
+        canActivate: [__WEBPACK_IMPORTED_MODULE_12__guards_manager_guard__["a" /* ManagerGuard */]]
+    },
+    {
+        path: '**',
+        component: __WEBPACK_IMPORTED_MODULE_2__components_home_home_component__["a" /* HomeComponent */]
+    }
 ];
 var AppRoutingModule = (function () {
     function AppRoutingModule() {
@@ -194,12 +204,16 @@ var AppComponent = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__guards_manager_guard__ = __webpack_require__("../../../../../src/app/guards/manager.guard.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__components_activate_activate_component__ = __webpack_require__("../../../../../src/app/components/activate/activate.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__components_projects_projects_component__ = __webpack_require__("../../../../../src/app/components/projects/projects.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__components_project_project_component__ = __webpack_require__("../../../../../src/app/components/project/project.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__angular_common__ = __webpack_require__("../../../common/esm5/common.js");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
+
 
 
 
@@ -235,7 +249,8 @@ var AppModule = (function () {
                 __WEBPACK_IMPORTED_MODULE_13__components_login_login_component__["a" /* LoginComponent */],
                 __WEBPACK_IMPORTED_MODULE_14__components_profile_profile_component__["a" /* ProfileComponent */],
                 __WEBPACK_IMPORTED_MODULE_18__components_activate_activate_component__["a" /* ActivateComponent */],
-                __WEBPACK_IMPORTED_MODULE_19__components_projects_projects_component__["a" /* ProjectsComponent */]
+                __WEBPACK_IMPORTED_MODULE_19__components_projects_projects_component__["a" /* ProjectsComponent */],
+                __WEBPACK_IMPORTED_MODULE_20__components_project_project_component__["a" /* ProjectComponent */]
             ],
             imports: [
                 __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
@@ -245,7 +260,7 @@ var AppModule = (function () {
                 __WEBPACK_IMPORTED_MODULE_4__app_routing_module__["a" /* AppRoutingModule */],
                 __WEBPACK_IMPORTED_MODULE_5_angular2_flash_messages__["FlashMessagesModule"]
             ],
-            providers: [__WEBPACK_IMPORTED_MODULE_11__services_auth_service__["a" /* AuthService */], __WEBPACK_IMPORTED_MODULE_12__services_project_service__["a" /* ProjectService */], __WEBPACK_IMPORTED_MODULE_15__guards_auth_guard__["a" /* AuthGuard */], __WEBPACK_IMPORTED_MODULE_16__guards_notAuth_guard__["a" /* NotAuthGuard */], __WEBPACK_IMPORTED_MODULE_17__guards_manager_guard__["a" /* ManagerGuard */]],
+            providers: [__WEBPACK_IMPORTED_MODULE_11__services_auth_service__["a" /* AuthService */], __WEBPACK_IMPORTED_MODULE_12__services_project_service__["a" /* ProjectService */], __WEBPACK_IMPORTED_MODULE_15__guards_auth_guard__["a" /* AuthGuard */], __WEBPACK_IMPORTED_MODULE_16__guards_notAuth_guard__["a" /* NotAuthGuard */], __WEBPACK_IMPORTED_MODULE_17__guards_manager_guard__["a" /* ManagerGuard */], __WEBPACK_IMPORTED_MODULE_21__angular_common__["DatePipe"]],
             bootstrap: [__WEBPACK_IMPORTED_MODULE_6__app_component__["a" /* AppComponent */]]
         })
     ], AppModule);
@@ -601,7 +616,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/navbar/navbar.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<nav class=\"navbar navbar-expand-md navbar-dark fixed-top bg-dark\">\n    <a class=\"navbar-brand\" href=\"#\">Fixed navbar</a>\n    <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarCollapse\" aria-controls=\"navbarCollapse\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\n    <span class=\"navbar-toggler-icon\"></span>\n  </button>\n    <div class=\"collapse navbar-collapse\" id=\"navbarCollapse\">\n        <ul class=\"navbar-nav mr-auto\">\n            <li [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact:true}\" class=\"nav-item active\">\n                <a class=\"nav-link\" routerLink=\"/home\">Home <span class=\"sr-only\">(current)</span></a>\n            </li>\n        </ul>\n        <ul class=\"navbar-nav navbar-right\">\n            <li class=\"nav-item\">\n                <a *ngIf=\"authService.loggedIn()\" class=\"nav-link\" routerLink=\"/about\">About</a>\n            </li>\n            <li class=\"nav-item\">\n                <a *ngIf=\"authService.isManager()\" class=\"nav-link\" routerLink=\"/projects\">Projects</a>\n            </li>\n            <li class=\"nav-item\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact:true}\" class=\"nav-item active\">\n                <a *ngIf=\"!authService.loggedIn()\" class=\"nav-link\" routerLink=\"/login\">log in</a>\n            </li>\n            <li class=\"nav-item\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact:true}\" class=\"nav-item active\">\n                <a *ngIf=\"authService.loggedIn()\" class=\"nav-link\" routerLink=\"/profile\">Profile</a>\n            </li>\n            <li class=\"nav-item\">\n                <a *ngIf=\"authService.loggedIn()\" class=\"nav-link disabled\" href=\"#\" (click)=\"onLogoutClick()\">log out</a>\n            </li>\n            <li class=\"nav-item\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact:true}\" class=\"nav-item active\">\n                <a *ngIf=\"!authService.loggedIn()\" class=\"nav-link\" routerLink=\"/register\">Register</a>\n            </li>\n        </ul>\n    </div>\n</nav>"
+module.exports = "<nav class=\"navbar navbar-expand-md navbar-dark fixed-top bg-dark\">\n    <a class=\"navbar-brand\" href=\"#\">Task Tracker</a>\n    <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarCollapse\" aria-controls=\"navbarCollapse\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\n    <span class=\"navbar-toggler-icon\"></span>\n  </button>\n    <div class=\"collapse navbar-collapse\" id=\"navbarCollapse\">\n        <ul class=\"navbar-nav mr-auto\">\n            <li [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact:true}\" class=\"nav-item active\">\n                <a class=\"nav-link\" routerLink=\"/home\">Home <span class=\"sr-only\">(current)</span></a>\n            </li>\n        </ul>\n        <ul class=\"navbar-nav navbar-right\">\n            <li class=\"nav-item\">\n                <a *ngIf=\"authService.loggedIn()\" class=\"nav-link\" routerLink=\"/about\">About</a>\n            </li>\n            <li class=\"nav-item\">\n                <a *ngIf=\"authService.isManager()\" class=\"nav-link\" routerLink=\"/projects\">Projects</a>\n            </li>\n            <li class=\"nav-item\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact:true}\" class=\"nav-item active\">\n                <a *ngIf=\"!authService.loggedIn()\" class=\"nav-link\" routerLink=\"/login\">log in</a>\n            </li>\n            <li class=\"nav-item\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact:true}\" class=\"nav-item active\">\n                <a *ngIf=\"authService.loggedIn()\" class=\"nav-link\" routerLink=\"/profile\">Profile</a>\n            </li>\n            <li class=\"nav-item\">\n                <a *ngIf=\"authService.loggedIn()\" class=\"nav-link disabled\" href=\"#\" (click)=\"onLogoutClick()\">log out</a>\n            </li>\n            <li class=\"nav-item\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact:true}\" class=\"nav-item active\">\n                <a *ngIf=\"!authService.loggedIn()\" class=\"nav-link\" routerLink=\"/register\">Register</a>\n            </li>\n        </ul>\n    </div>\n</nav>"
 
 /***/ }),
 
@@ -733,6 +748,144 @@ var ProfileComponent = (function () {
 
 /***/ }),
 
+/***/ "../../../../../src/app/components/project/project.component.css":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ "../../../../../src/app/components/project/project.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"jumbotron\">\n    <h2 class=\"page-header\">Project {{ project.title }}</h2>\n</div>\n<!--  Success/Error Message -->\n<div class=\"row show-hide-message\" *ngIf=\"message && newDeveloper\">\n    <div [ngClass]=\"messageClass\">\n        {{ message }}\n    </div>\n</div>\n\n<button type=\"button\" name=\"button\" class=\"btn btn-warning\" *ngIf=\"!newDeveloper\" (click)=\"NewProjectsDeveloper()\">Add developer</button>\n<br>\n<br>\n\n\n<form [formGroup]=\"newDeveloperForm\" name=\"developerForm\" (submit)=\"onDeveloperSubmit()\" *ngIf=\"newDeveloper\">\n    <div class=\"form-group\">\n        <label> Choose developer</label>\n        <select class=\"form-control form-control-sm\" formControlName=\"addingDeveloper\">\n                <option *ngFor=\"let developer of developers\">{{ developer.username }} </option>\n        </select>\n    </div>\n\n    <button [disabled]=\"processing\" type=\"button\" (click)=\"goBack()\" name=\"button\" class=\"btn btn-warning\">Go Back</button>\n    <button [disabled]=\"processing\" type=\"submit\" name=\"button\" class=\"btn btn-success\">Add</button>\n\n</form>\n\n\n<div class=\"card\" *ngIf=\"!newDeveloper\">\n    <div class=\"card-header deep-orange lighten-1 white-text\">\n    </div>\n    <div class=\"card-body\">\n        <!-- <p>{{ project.description }}</p>-->\n        <h5> Developers: </h5>\n        <ul class=\"list-group\">\n            <li *ngFor=\"let developer of project.developers\" class=\"list-group-item\">\n                <strong>{{ developer.developerName }}</strong>\n            </li>\n        </ul>\n        <br>\n        <br>\n        <h5> Tasks: </h5>\n        <ul class=\"list-group\">\n            <li class=\"list-group-item\">\n                <strong>EEE</strong>\n                <strong>EEE</strong>\n                <strong>EEE</strong>\n            </li>\n        </ul>\n        <br>\n        <br>\n\n        <button [routerLink]=\"['/project/', project._id]\" type=\"button\" name=\"button\" class=\"btn btn-default\"><a class=\"btn btn-deep-orange\">More Information</a></button>\n    </div>\n    <div class=\"card-footer\">\n        <strong>Created by: </strong>{{ project.createdBy }}\n        <br>\n        <strong>Created at: </strong> {{ project.createdAt }}\n    </div>\n</div>"
+
+/***/ }),
+
+/***/ "../../../../../src/app/components/project/project.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ProjectComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_project_service__ = __webpack_require__("../../../../../src/app/services/project.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__("../../../router/esm5/router.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_forms__ = __webpack_require__("../../../forms/esm5/forms.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_common__ = __webpack_require__("../../../common/esm5/common.js");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+var ProjectComponent = (function () {
+    function ProjectComponent(formBuilder, activatedRoute, projectService, datePipe, router) {
+        this.formBuilder = formBuilder;
+        this.activatedRoute = activatedRoute;
+        this.projectService = projectService;
+        this.datePipe = datePipe;
+        this.router = router;
+        this.newDeveloper = false;
+        this.processing = false;
+        this.createNewProjectsDeveloperForm();
+    }
+    ProjectComponent.prototype.createNewProjectsDeveloperForm = function () {
+        this.newDeveloperForm = this.formBuilder.group({
+            addingDeveloper: ''
+        });
+    };
+    ProjectComponent.prototype.NewProjectsDeveloper = function () {
+        this.newDeveloper = true;
+    };
+    ProjectComponent.prototype.onDeveloperSubmit = function () {
+        var _this = this;
+        this.currentUrl = this.activatedRoute.snapshot.params;
+        this.processing = true;
+        this.data = {
+            developer: this.newDeveloperForm.get('addingDeveloper').value,
+            id: this.currentUrl.id
+        };
+        this.projectService.addProjectsDeveloper(this.data).subscribe(function (data) {
+            // Check if PUT request was a success or not
+            if (!data.success) {
+                _this.messageClass = 'alert alert-danger'; // Set error bootstrap class
+                _this.message = data.message; // Set error message
+                _this.processing = false; // Unlock form fields
+            }
+            else {
+                _this.messageClass = 'alert alert-success'; // Set success bootstrap class
+                _this.message = data.message; // Set success message
+                // After two seconds, navigate back to blog page
+                setTimeout(function () {
+                    _this.router.navigate(['/project']); // Navigate back to route page
+                }, 2000);
+            }
+        });
+    };
+    ProjectComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.currentUrl = this.activatedRoute.snapshot.params;
+        this.projectService.getProject(this.currentUrl.id).subscribe(function (data) {
+            // Check if GET request was success or not
+            if (!data.success) {
+                _this.messageClass = 'alert alert-danger'; // Set bootstrap error class
+                _this.message = data.message; // Set error message
+            }
+            else {
+                _this.project = data.project; // Save blog object for use in HTML
+                _this.project.createdAt = _this.datePipe.transform(_this.project.createdAt);
+            }
+        });
+        this.projectService.getAllDevelopers().subscribe(function (data) {
+            // Check if GET request was success or not
+            if (!data.success) {
+                _this.messageClass = 'alert alert-danger'; // Set bootstrap error class
+                _this.message = data.message; // Set error message
+            }
+            else {
+                _this.developers = data.developers; // Save blog object for use in HTML
+            }
+        });
+    };
+    ProjectComponent = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+            selector: 'app-project',
+            template: __webpack_require__("../../../../../src/app/components/project/project.component.html"),
+            styles: [__webpack_require__("../../../../../src/app/components/project/project.component.css")],
+            providers: [__WEBPACK_IMPORTED_MODULE_4__angular_common__["DatePipe"]]
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_3__angular_forms__["a" /* FormBuilder */],
+            __WEBPACK_IMPORTED_MODULE_2__angular_router__["a" /* ActivatedRoute */],
+            __WEBPACK_IMPORTED_MODULE_1__services_project_service__["a" /* ProjectService */],
+            __WEBPACK_IMPORTED_MODULE_4__angular_common__["DatePipe"],
+            __WEBPACK_IMPORTED_MODULE_2__angular_router__["b" /* Router */]])
+    ], ProjectComponent);
+    return ProjectComponent;
+}());
+
+
+
+/***/ }),
+
 /***/ "../../../../../src/app/components/projects/projects.component.css":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -754,7 +907,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/projects/projects.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"jumbotron\">\n    <h2 class=\"page-header\">Projects</h2>\n</div>\n<!--  Success/Error Message -->\n<div class=\"row show-hide-message\" *ngIf=\"message && newProject\">\n    <div [ngClass]=\"messageClass\">\n        {{ message }}\n    </div>\n</div>\n\n<div class=\"container\">\n\n    <button type=\"button\" name=\"button\" class=\"btn btn-warning\" *ngIf=\"!newProject\" (click)=\"NewProjectForm()\">New Post</button>\n    <br>\n    <br>\n\n    <form [formGroup]=\"newProjectForm\" name=\"projectForm\" (submit)=\"onProjectSubmit()\" *ngIf=\"newProject\">\n        <div class=\"form-group\">\n            <label for=\"title\">Title</label>\n            <input type=\"text\" name=\"title\" class=\"form-control\" placeholder=\"*Blog Title\" autocomplete=\"off\" formControlName=\"title\" />\n        </div>\n\n        <div class=\"form-group\">\n            <label for=\"description\">Description</label>\n            <textarea name=\"description\" rows=\"8\" cols=\"80\" placeholder=\"*Description\" class=\"form-control\" formControlName=\"description\"></textarea>\n        </div>\n\n        <button [disabled]=\"processing\" type=\"button\" (click)=\"goBack()\" name=\"button\" class=\"btn btn-warning\">Go Back</button>\n        <button [disabled]=\"processing\" type=\"submit\" name=\"button\" class=\"btn btn-success\">Submit</button>\n\n    </form>\n\n    <div *ngIf=\"!newProject\">\n        <!--<div class=\"row project-row\">\n            <div class=\"col-xs-6 col-lg-4\">\n                <h2>Heading</h2>\n                <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>\n            </div>\n        </div>-->\n        <div class=\"card\">\n            <div class=\"card-header deep-orange lighten-1 white-text\">\n                Featured\n            </div>\n            <div class=\"card-body\">\n                <h4 class=\"card-title\">Special title treatment</h4>\n                <p class=\"card-text\">With supporting text below as a natural lead-in to additional content.</p>\n                <button type=\"button\" name=\"button\" class=\"btn btn-default\"><a class=\"btn btn-deep-orange\">Go somewhere</a></button>\n            </div>\n        </div>\n    </div>"
+module.exports = "<div class=\"jumbotron\">\n    <h2 class=\"page-header\">Projects</h2>\n</div>\n<!--  Success/Error Message -->\n<div class=\"row show-hide-message\" *ngIf=\"message && newProject\">\n    <div [ngClass]=\"messageClass\">\n        {{ message }}\n    </div>\n</div>\n\n<div class=\"container\">\n\n    <button type=\"button\" name=\"button\" class=\"btn btn-warning\" *ngIf=\"!newProject\" (click)=\"NewProjectForm()\">New Project</button>\n    <br>\n    <br>\n\n    <form [formGroup]=\"newProjectForm\" name=\"projectForm\" (submit)=\"onProjectSubmit()\" *ngIf=\"newProject\">\n        <div class=\"form-group\">\n            <label for=\"title\">Title</label>\n            <input type=\"text\" name=\"title\" class=\"form-control\" placeholder=\"*Blog Title\" autocomplete=\"off\" formControlName=\"title\" />\n        </div>\n\n        <div class=\"form-group\">\n            <label for=\"description\">Description</label>\n            <textarea name=\"description\" rows=\"8\" cols=\"80\" placeholder=\"*Description\" class=\"form-control\" formControlName=\"description\"></textarea>\n        </div>\n\n        <button [disabled]=\"processing\" type=\"button\" (click)=\"goBack()\" name=\"button\" class=\"btn btn-warning\">Go Back</button>\n        <button [disabled]=\"processing\" type=\"submit\" name=\"button\" class=\"btn btn-success\">Submit</button>\n\n    </form>\n\n    <div *ngIf=\"!newProject\">\n\n        <div class=\"card\" *ngFor=\"let project of projects\">\n            <div class=\"card-header deep-orange lighten-1 white-text\">\n            </div>\n            <div class=\"card-body\">\n                <h4 class=\"card-title\">{{ project.title }}</h4>\n                <p class=\"card-text\"> {{ project.createdBy }} </p>\n                <button [routerLink]=\"['/project/', project._id]\" type=\"button\" name=\"button\" class=\"btn btn-default\"><a class=\"btn btn-deep-orange\">More Information</a></button>\n            </div>\n        </div>\n    </div>"
 
 /***/ }),
 
@@ -788,6 +941,7 @@ var ProjectsComponent = (function () {
         this.newProject = false;
         this.loadingProjects = false;
         this.processing = false;
+        this.projects = [{}];
         this.createNewProjectForm();
     }
     ProjectsComponent.prototype.createNewProjectForm = function () {
@@ -800,7 +954,12 @@ var ProjectsComponent = (function () {
         this.newProject = true;
     };
     ProjectsComponent.prototype.reloadProject = function () {
+        var _this = this;
         this.loadingProjects = true;
+        this.getAllProjects();
+        setTimeout(function () {
+            _this.loadingProjects = false; // Release button lock after four seconds
+        }, 4000);
     };
     ProjectsComponent.prototype.onProjectSubmit = function () {
         var _this = this;
@@ -824,6 +983,7 @@ var ProjectsComponent = (function () {
                     _this.processing = false;
                     _this.message = false;
                     _this.newProjectForm.reset();
+                    _this.getAllProjects();
                 }, 500);
             }
         });
@@ -831,10 +991,26 @@ var ProjectsComponent = (function () {
     ProjectsComponent.prototype.goBack = function () {
         window.location.reload();
     };
+    ProjectsComponent.prototype.getAllProjects = function () {
+        var _this = this;
+        console.log(typeof this.projects);
+        var that = this;
+        this.projects.splice(0, 1);
+        // Function to GET all blogs from database
+        this.projectService.getAllProjects().subscribe(function (data) {
+            for (var i = 0; i < data.projects.length; i++) {
+                if (data.projects[i].createdBy === that.username) {
+                    _this.projects.push(data.projects[i]);
+                }
+            }
+        });
+    };
     ProjectsComponent.prototype.ngOnInit = function () {
         var _this = this;
+        var that = this;
         this.authService.getProfile().subscribe(function (profile) {
             _this.username = profile.user.username; // Used when creating new project
+            that.getAllProjects();
         });
     };
     ProjectsComponent = __decorate([
@@ -1252,6 +1428,22 @@ var ProjectService = (function () {
     ProjectService.prototype.newProject = function (project) {
         this.createAuthenticationHeaders();
         return this.http.post(this.domain + '/projects/newProject', project, this.options).map(function (res) { return res.json(); });
+    };
+    ProjectService.prototype.getAllProjects = function () {
+        this.createAuthenticationHeaders();
+        return this.http.get(this.domain + '/projects/allProjects', this.options).map(function (res) { return res.json(); });
+    };
+    ProjectService.prototype.getProject = function (id) {
+        this.createAuthenticationHeaders(); // Create headers
+        return this.http.get(this.domain + '/projects/project/' + id, this.options).map(function (res) { return res.json(); });
+    };
+    ProjectService.prototype.getAllDevelopers = function () {
+        this.createAuthenticationHeaders();
+        return this.http.get(this.domain + '/developers/allDevelopers', this.options).map(function (res) { return res.json(); });
+    };
+    ProjectService.prototype.addProjectsDeveloper = function (data) {
+        this.createAuthenticationHeaders(); // Create headers
+        return this.http.put(this.domain + '/developers/addDeveloper', data, this.options).map(function (res) { return res.json(); });
     };
     ProjectService = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(),

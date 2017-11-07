@@ -24,7 +24,8 @@ import { ManagerGuard } from './guards/manager.guard';
 
 import { ActivateComponent } from './components/activate/activate.component';
 import { ProjectsComponent } from './components/projects/projects.component';
-
+import { ProjectComponent } from './components/project/project.component';
+import { DatePipe } from '@angular/common';
 @NgModule({
   declarations: [
     AppComponent,
@@ -35,7 +36,8 @@ import { ProjectsComponent } from './components/projects/projects.component';
     LoginComponent,
     ProfileComponent,
     ActivateComponent,
-    ProjectsComponent
+    ProjectsComponent,
+    ProjectComponent
   ],
   imports: [
     BrowserModule,
@@ -45,7 +47,7 @@ import { ProjectsComponent } from './components/projects/projects.component';
     AppRoutingModule,
     FlashMessagesModule
   ],
-  providers: [AuthService, ProjectService, AuthGuard, NotAuthGuard, ManagerGuard],
+  providers: [AuthService, ProjectService, AuthGuard, NotAuthGuard, ManagerGuard, DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

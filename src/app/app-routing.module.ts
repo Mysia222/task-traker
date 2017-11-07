@@ -7,6 +7,7 @@ import { LoginComponent } from './components/login/login.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { ActivateComponent } from './components/activate/activate.component';
 import { ProjectsComponent } from './components/projects/projects.component';
+import { ProjectComponent } from './components/project/project.component';
 
 import { AuthGuard } from './guards/auth.guard';
 import { NotAuthGuard } from './guards/notAuth.guard';
@@ -42,7 +43,7 @@ const appRoutes: Routes = [
   {
     path: 'activate/:token',
     component: ActivateComponent,
-    canActivate: [NotAuthGuard]
+    canActivate: [AuthGuard]
   },
   {
     path: 'projects',
@@ -54,7 +55,15 @@ const appRoutes: Routes = [
     component: ProfileComponent,
     canActivate: [AuthGuard]
   },
-  { path: '**', component: HomeComponent }
+  {
+    path: 'project/:id',
+    component: ProjectComponent,
+    canActivate: [ManagerGuard]
+  },
+  {
+    path: '**',
+    component: HomeComponent
+  }
 
 ];
 
@@ -66,4 +75,4 @@ const appRoutes: Routes = [
   exports: [RouterModule]
 })
 
-export class AppRoutingModule { }
+export class AppRoutingModule {}

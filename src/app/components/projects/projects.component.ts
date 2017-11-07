@@ -16,6 +16,7 @@ export class ProjectsComponent implements OnInit {
   processing = false;
   newProjectForm: FormGroup;
   username;
+  projects = [{}];
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
@@ -38,6 +39,10 @@ export class ProjectsComponent implements OnInit {
 
   reloadProject() {
     this.loadingProjects = true;
+    this.getAllProjects();
+    setTimeout(() => {
+      this.loadingProjects = false; // Release button lock after four seconds
+    }, 4000);
   }
 
   onProjectSubmit() {
@@ -63,6 +68,7 @@ export class ProjectsComponent implements OnInit {
           this.processing = false;
           this.message = false;
           this.newProjectForm.reset();
+          this.getAllProjects();
         }, 500);
       }
     });
@@ -72,11 +78,29 @@ export class ProjectsComponent implements OnInit {
   goBack() {
     window.location.reload();
   }
-  
+
+  getAllProjects() {
+    console.log(typeof this.projects);
+    const that = this;
+    this.projects.splice(0, 1);
+    // Function to GET all blogs from database
+    this.projectService.getAllProjects().subscribe(data => {
+      for (let i = 0; i < data.projects.length; i++) {
+        if (data.projects[i].createdBy === that.username) {
+          this.projects.push(data.projects[i]);
+        }
+      }
+    });
+  }
+
   ngOnInit() {
+
+    const that = this;
     this.authService.getProfile().subscribe(profile => {
       this.username = profile.user.username; // Used when creating new project
+      that.getAllProjects();
     });
+
   }
 
 }

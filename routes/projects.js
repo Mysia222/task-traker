@@ -43,5 +43,64 @@ module.exports = (router) => {
         }
     });
 
+    router.get('/allProjects', (req, res) => {
+
+        Project.find({}, (err, projects) => {
+
+            if (err) {
+                res.json({ success: false, message: err });
+            } else {
+
+                if (!projects) {
+                    res.json({ success: false, message: 'No Projects found.' });
+                } else {
+                    res.json({ success: true, projects: projects });
+                }
+            }
+        }).sort({ '_id': -1 });
+    });
+
+
+    router.get('/project/:id', (req, res) => {
+
+        if (!req.params.id) {
+            res.json({ success: false, message: 'No project ID was provided.' });
+        } else {
+            Project.findOne({ _id: req.params.id }, (err, project) => {
+
+                if (err) {
+                    res.json({ success: false, message: 'Not a valid project id' });
+                } else {
+
+                    if (!project) {
+                        res.json({ success: false, message: 'Prore not found.' });
+                    } else {
+                        // Find the current user that is logged in
+                        User.findOne({ _id: req.decoded.userId }, (err, user) => {
+
+                            if (err) {
+                                res.json({ success: false, message: err });
+                            } else {
+
+                                if (!user) {
+                                    res.json({ success: false, message: 'Unable to authenticate user' });
+                                } else {
+
+                                    if (user.username !== project.createdBy) {
+                                        res.json({ success: false, message: 'You are not authorized to edit this project.' });
+                                    } else {
+                                        res.json({ success: true, project: project });
+                                    }
+                                }
+                            }
+                        });
+                    }
+                }
+            });
+        }
+    });
+
+
+
     return router;
 };

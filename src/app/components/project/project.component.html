@@ -1,0 +1,80 @@
+<div class="jumbotron">
+    <h2 class="page-header">Project {{ project.title }}</h2>
+</div>
+<!--  Success/Error Message -->
+<div class="row show-hide-message" *ngIf="message && newDeveloper && newTask">
+    <div [ngClass]="messageClass">
+        {{ message }}
+    </div>
+</div>
+
+<button type="button" name="button" class="btn btn-warning" *ngIf="!newDeveloper" (click)="NewProjectsDeveloper()">Add developer</button>
+<br>
+<br>
+
+
+<form [formGroup]="newDeveloperForm" name="developerForm" (submit)="onDeveloperSubmit()" *ngIf="newDeveloper">
+    <div class="form-group">
+        <label> Choose developer</label>
+        <select class="form-control form-control-sm" formControlName="addingDeveloper">
+                <option *ngFor="let developer of developers">{{ developer.username }} </option>
+        </select>
+    </div>
+
+    <button [disabled]="processing" type="button" (click)="goBack()" name="button" class="btn btn-warning">Go Back</button>
+    <button [disabled]="processing" type="submit" name="button" class="btn btn-success">Add</button>
+
+</form>
+
+
+<form [formGroup]="newTaskForm" name="projectForm" (submit)="onTaskSubmit()" *ngIf="newProject">
+    <div class="form-group">
+        <label for="title">Title</label>
+        <input type="text" name="title" class="form-control" placeholder="*Blog Title" autocomplete="off" formControlName="title" />
+    </div>
+
+    <div class="form-group">
+        <label for="description">Description</label>
+        <textarea name="description" rows="8" cols="80" placeholder="*Description" class="form-control" formControlName="description"></textarea>
+    </div>
+
+    <button [disabled]="processing" type="button" (click)="goBack()" name="button" class="btn btn-warning">Go Back</button>
+    <button [disabled]="processing" type="submit" name="button" class="btn btn-success">Submit</button>
+
+</form>
+
+
+
+
+<div class="card" *ngIf="!newDeveloper">
+    <div class="card-header deep-orange lighten-1 white-text">
+    </div>
+    <div class="card-body">
+        <!-- <p>{{ project.description }}</p>-->
+        <h5> Developers: </h5>
+        <ul class="list-group">
+            <li *ngFor="let developer of project.developers" class="list-group-item">
+                <strong>{{ developer.developerName }}</strong>
+            </li>
+        </ul>
+        <br>
+        <br>
+        <h5> Tasks: </h5>
+        <ul class="list-group">
+            <li class="list-group-item">
+                <strong>EEE</strong>
+                <strong>EEE</strong>
+                <strong>EEE</strong>
+            </li>
+        </ul>
+        <br>
+        <br>
+
+        <button [routerLink]="['/project/', project._id]" type="button" name="button" class="btn btn-default"><a class="btn btn-deep-orange">More Information</a></button>
+    </div>
+    <div class="card-footer">
+        <strong>Created by: </strong>{{ project.createdBy }}
+        <br>
+        <strong>Created at: </strong> {{ project.createdAt }}
+    </div>
+</div>

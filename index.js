@@ -9,6 +9,7 @@ const path = require('path');
 //routes
 const authentication = require('./routes/authentication')(router);
 const projects = require('./routes/projects')(router);
+const developers = require('./routes/developers')(router);
 
 const bodyParser = require('body-parser');
 const cors = require('cors');
@@ -35,6 +36,7 @@ app.use(express.static(path.join(__dirname, 'dist')));
 // Use routes in application
 app.use('/authentication', authentication);
 app.use('/projects', projects);
+app.use('/developers', developers);
 
 // Send all other requests to the Angular app
 app.get('*', (req, res) => {

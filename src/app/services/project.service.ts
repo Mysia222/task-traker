@@ -30,5 +30,26 @@ export class ProjectService {
       return this.http.post(this.domain + '/projects/newProject', project, this.options).map(res => res.json());
     }
 
+    getAllProjects() {
+      this.createAuthenticationHeaders();
+      return this.http.get(this.domain + '/projects/allProjects', this.options).map(res => res.json());
+    }
+
+  
+    getProject(id) {
+    this.createAuthenticationHeaders(); // Create headers
+    return this.http.get(this.domain + '/projects/project/' + id, this.options).map(res => res.json());
+  }
+
+  getAllDevelopers() {
+    this.createAuthenticationHeaders();
+    return this.http.get(this.domain + '/developers/allDevelopers', this.options).map(res => res.json());
+  }
+
+  addProjectsDeveloper(data) {
+    this.createAuthenticationHeaders(); // Create headers
+    return this.http.put(this.domain + '/developers/addDeveloper', data, this.options).map(res => res.json());
+  }
+
 
 }
